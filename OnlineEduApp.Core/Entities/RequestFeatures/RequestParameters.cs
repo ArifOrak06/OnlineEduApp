@@ -1,0 +1,19 @@
+﻿namespace OnlineEduApp.Core.Entities.RequestFeatures
+{
+    public abstract class RequestParameters
+    {
+        const int maxPageSize = 50;
+
+        // Auto-implemented properties for pagination
+        public int PageNumber { get; set; }
+
+        private int _pageSize;
+
+        public int PageSize
+        {
+            get { return _pageSize; }
+            set { _pageSize = value > maxPageSize ? maxPageSize : value; } // prop'a atanan dğer maxPageSize'den büyükse maxPageSize değeri olan 50 atanır, küçükse prop'a atanan değer atanır.
+
+        }
+    }
+}

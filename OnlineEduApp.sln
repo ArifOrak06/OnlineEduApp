@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36408.4
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineEduApp.WebAPI", "OnlineEduApp.WebAPI\OnlineEduApp.WebAPI.csproj", "{604B6CB6-EC26-481E-88CA-A295ED409738}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineEduApp.Core", "OnlineEduApp.Core\OnlineEduApp.Core.csproj", "{79F0151C-EBFC-48CB-A492-AA139DA9AE19}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineEduApp.Service", "OnlineEduApp.Service\OnlineEduApp.Service.csproj", "{1DD65B44-6293-41F0-BB84-14AF74922DCB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineEduApp.Repository", "OnlineEduApp.Repository\OnlineEduApp.Repository.csproj", "{1E2014B5-7B78-4B2B-BB80-B4A6F4A40BF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineEduApp.SharedLibrary", "OnlineEduApp.SharedLibrary\OnlineEduApp.SharedLibrary.csproj", "{0A287CE0-F810-4BDF-AE6C-41E4945C5691}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OnlineEduApp.UI", "OnlineEduApp.UI\OnlineEduApp.UI.csproj", "{3AE3960F-21F2-4D12-922F-16947DD392C2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{604B6CB6-EC26-481E-88CA-A295ED409738}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{604B6CB6-EC26-481E-88CA-A295ED409738}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{604B6CB6-EC26-481E-88CA-A295ED409738}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{604B6CB6-EC26-481E-88CA-A295ED409738}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79F0151C-EBFC-48CB-A492-AA139DA9AE19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79F0151C-EBFC-48CB-A492-AA139DA9AE19}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79F0151C-EBFC-48CB-A492-AA139DA9AE19}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79F0151C-EBFC-48CB-A492-AA139DA9AE19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1DD65B44-6293-41F0-BB84-14AF74922DCB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1DD65B44-6293-41F0-BB84-14AF74922DCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1DD65B44-6293-41F0-BB84-14AF74922DCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1DD65B44-6293-41F0-BB84-14AF74922DCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1E2014B5-7B78-4B2B-BB80-B4A6F4A40BF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1E2014B5-7B78-4B2B-BB80-B4A6F4A40BF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1E2014B5-7B78-4B2B-BB80-B4A6F4A40BF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1E2014B5-7B78-4B2B-BB80-B4A6F4A40BF0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0A287CE0-F810-4BDF-AE6C-41E4945C5691}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0A287CE0-F810-4BDF-AE6C-41E4945C5691}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0A287CE0-F810-4BDF-AE6C-41E4945C5691}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0A287CE0-F810-4BDF-AE6C-41E4945C5691}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AE3960F-21F2-4D12-922F-16947DD392C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AE3960F-21F2-4D12-922F-16947DD392C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AE3960F-21F2-4D12-922F-16947DD392C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AE3960F-21F2-4D12-922F-16947DD392C2}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {965DAF6B-C57D-4DBD-9963-9D724CD97264}
+	EndGlobalSection
+EndGlobal
