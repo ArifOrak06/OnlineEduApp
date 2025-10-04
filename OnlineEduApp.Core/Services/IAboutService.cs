@@ -1,17 +1,19 @@
 ﻿using OnlineEduApp.Core.DTOs.AboutDTOs;
 using OnlineEduApp.Core.Entities.RequestFeatures;
+using OnlineEduApp.SharedLibrary.Response;
+using OnlineEduApp.SharedLibrary.ResponseResultPattern;
 
 namespace OnlineEduApp.Core.Services
 {
     public interface IAboutService
     {
-        Task<(List<AboutDto> aboutDtoList, MetaData metaData)> GetAllActiveAboutsAsync(AboutParameters aboutParameters);
-        Task<(List<AboutDto> aboutDtoList, MetaData metaData)> GetAllDeletedAboutsAsync(AboutParameters aboutParameters);
-        Task<AboutDto> GetOneAboutByIdAsync(int aboutId);
-        Task<AboutDtoForCreate> CreateOneAboutAsync(AboutDtoForCreate aboutDtoForCreate);
-        Task<AboutDtoForUpdate> UpdateOneAboutAsync(int aboutId, AboutDtoForUpdate aboutDtoForUpdate);
-        Task DeleteOneAboutAsync(int aboutId);
-        Task SoftDeleteOneAboutAsync(int aboutId);
+        Task<(CustomResponseDto<List<AboutDto>> responseDtoList, MetaData metaData)> GetAllActiveAboutsAsync(AboutParameters aboutParameters);
+        Task<(CustomResponseDto<List<AboutDto>> responseDtoList, MetaData metaData)> GetAllDeletedAboutsAsync(AboutParameters aboutParameters);
+        Task<CustomResponseDto<AboutDto>> GetOneAboutByIdAsync(int aboutId);
+        Task<CustomResponseDto<AboutDtoForCreate>> CreateOneAboutAsync(AboutDtoForCreate aboutDtoForCreate);
+        Task<CustomResponseDto<AboutDtoForUpdate>> UpdateOneAboutAsync(int aboutId, AboutDtoForUpdate aboutDtoForUpdate);
+        Task<CustomResponseDto<NoContentDto>> DeleteOneAboutAsync(int aboutId);
+        Task<CustomResponseDto<NoContentDto>> SoftDeleteOneAboutAsync(int aboutId);
 
     }
 }

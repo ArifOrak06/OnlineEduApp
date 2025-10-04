@@ -6,6 +6,8 @@ using OnlineEduApp.Core.Entities.RequestFeatures;
 using OnlineEduApp.Core.Repositories;
 using OnlineEduApp.Core.Services;
 using OnlineEduApp.Core.Utilities.Uow;
+using OnlineEduApp.SharedLibrary.Response;
+using OnlineEduApp.SharedLibrary.ResponseResultPattern;
 
 namespace OnlineEduApp.Service.Services
 {
@@ -22,7 +24,7 @@ namespace OnlineEduApp.Service.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<AboutDtoForCreate> CreateOneAboutAsync(AboutDtoForCreate aboutDtoForCreate)
+        public async Task<CustomResponseDto<AboutDtoForCreate>> CreateOneAboutAsync(AboutDtoForCreate aboutDtoForCreate)
         {
             // Validation Kuralları Data Annotation olarak propertyler üzerinden işletilmektedir.
 
@@ -36,11 +38,11 @@ namespace OnlineEduApp.Service.Services
             newAbout.ModifiedDate = DateTime.UtcNow;
             await _repositoryManager.AboutRepository.CreateOneAboutAsync(newAbout);
             await _unitOfWork.CommitAsync();
-            return _mapper.Map<AboutDtoForCreate>(newAbout);
+            return CustomResponseDto<AboutDtoForCreate>.Success(200,_mapper.Map<AboutDtoForCreate>(newAbout));
 
         }
 
-        public async Task DeleteOneAboutAsync(int aboutId)
+        public async Task<CustomResponseDto<NoContentDto>> DeleteOneAboutAsync(int aboutId)
         {
 
             var currentEntity = await _repositoryManager.AboutRepository.GetByFilterAbouts(true,x => x.Id.Equals(aboutId)).SingleOrDefaultAsync();
@@ -48,36 +50,39 @@ namespace OnlineEduApp.Service.Services
                 throw new Exception(nameof(aboutId));
             _repositoryManager.AboutRepository.DeleteOneAbout(currentEntity);
             await _unitOfWork.CommitAsync();
-
+            return CustomResponseDto<NoContentDto>.Success(204);
         }
 
-        public async Task<(List<AboutDto> aboutDtoList, MetaData metaData)> GetAllActiveAboutsAsync(AboutParameters aboutParameters)
+        public async Task<(CustomResponseDto<List<AboutDto>> responseDtoList, MetaData metaData)> GetAllActiveAboutsAsync(AboutParameters aboutParameters)
         {
             var items = await _repositoryManager.AboutRepository.GetAllAboutsAsync(false,aboutParameters);
+
             if (items == null)
                 throw new ArgumentNullException(nameof(items));
-            var newItems = _mapper.Map<List<AboutDto>>(items);
-            return (newItems, items.MetaData);
+
+            var newAboutDtoList = _mapper.Map<List<AboutDto>>(items);
+
+            return (CustomResponseDto<List<AboutDto>>.Success(200, newAboutDtoList), items.MetaData);
         }
 
-        public async Task<(List<AboutDto> aboutDtoList, MetaData metaData)> GetAllDeletedAboutsAsync(AboutParameters aboutParameters)
+        public async Task<(CustomResponseDto<List<AboutDto>> responseDtoList, MetaData metaData)> GetAllDeletedAboutsAsync(AboutParameters aboutParameters)
         {
             var items = await _repositoryManager.AboutRepository.GetAllAboutsAsync(false, aboutParameters,x => !x.IsActive&&x.IsDeleted);
             if (items == null)
                 throw new ArgumentNullException(nameof(items));
             var newItemList = _mapper.Map<List<AboutDto>>(items);
-            return (newItemList, items.MetaData);
+            return (CustomResponseDto<List<AboutDto>>.Success(200,newItemList), items.MetaData);
         }
 
-        public async Task<AboutDto> GetOneAboutByIdAsync(int aboutId)
+        public async Task<CustomResponseDto<AboutDto>> GetOneAboutByIdAsync(int aboutId)
         {
             var currentItem = await _repositoryManager.AboutRepository.GetAboutByIdAsync(false, aboutId);
             if(currentItem == null)
                 throw new ArgumentNullException(nameof(currentItem));
-            return _mapper.Map<AboutDto>(currentItem);  
+            return CustomResponseDto<AboutDto>.Success(200,_mapper.Map<AboutDto>(currentItem));  
         }
 
-        public async Task SoftDeleteOneAboutAsync(int aboutId)
+        public async Task<CustomResponseDto<NoContentDto>> SoftDeleteOneAboutAsync(int aboutId)
         {
             var currentItem = await _repositoryManager.AboutRepository.GetByFilterAbouts(true, x => x.Id == aboutId).SingleOrDefaultAsync();
             if (currentItem == null)
@@ -86,10 +91,10 @@ namespace OnlineEduApp.Service.Services
             currentItem.IsDeleted = true;
             currentItem.ModifiedDate = DateTime.Now;
             await _unitOfWork.CommitAsync();
-
+            return CustomResponseDto<NoContentDto>.Success(204);
         }
 
-        public async Task<AboutDtoForUpdate> UpdateOneAboutAsync(int aboutId, AboutDtoForUpdate aboutDtoForUpdate)
+        public async Task<CustomResponseDto<AboutDtoForUpdate>> UpdateOneAboutAsync(int aboutId, AboutDtoForUpdate aboutDtoForUpdate)
         {
             // Validation Kuralları Data Annotation olarak propertyler üzerinden işletilmektedir.
             if (aboutDtoForUpdate == null && aboutId != aboutDtoForUpdate.Id)
@@ -111,7 +116,7 @@ namespace OnlineEduApp.Service.Services
             currentItem.ItemFour = aboutDtoForUpdate.ItemFour;
             currentItem.ImageUrlTwo = aboutDtoForUpdate.ImageUrlTwo;
             await _unitOfWork.CommitAsync();
-            return _mapper.Map<AboutDtoForUpdate>(currentItem);
+            return CustomResponseDto<AboutDtoForUpdate>.Success(200,_mapper.Map<AboutDtoForUpdate>(currentItem));
         }
     }
 }
