@@ -13,6 +13,8 @@ namespace OnlineEduApp.Service.Extensions.Microsoft
             services.AddAutoMapper(typeof(AboutProfile));
             services.AddScoped<IAboutService, AboutService>();
             services.AddScoped<IBannerService, BannerService>();
+            services.AddScoped<ICourseService, CourseService>();
+            services.AddScoped<IBlogService, BlogService>();
 
         }
     }

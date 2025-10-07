@@ -22,7 +22,7 @@ namespace OnlineEduApp.WebAPI.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAllAbouts([FromQuery]AboutParameters aboutParameters)
         {
-            // değişken tipini tanımlarken Service katmanından gelecek olan tuple'ın içeriğine göre tanımladık ki karışıklık olmasın.
+            // değişken tipini tanımlarken Service katmanından gelecek olan tuple'ın içeriğine göre tanımladık ki karışıklık olmasın ve MetaData'yı veyahut asıl data'yı kullanmak için erişebilelim.
 
             (CustomResponseDto<List<AboutDto>>? responseDtoList,MetaData? metaData) pagedResult = await _aboutService.GetAllActiveAboutsAsync(aboutParameters);
 
@@ -67,6 +67,14 @@ namespace OnlineEduApp.WebAPI.Controllers
             CustomResponseDto<NoContentDto>? result = await _aboutService.DeleteOneAboutAsync(aboutId);
             if (result.StatusCode == 204)
                 return NoContent();
+            return BadRequest();
+        }
+        [HttpPut("{aboutId:int")]
+        public async Task<IActionResult> UpdateOneAboutAsync([FromRoute(Name="aboutId")] int aboutId, [FromBody]AboutDtoForUpdate request)
+        {
+            var result = await _aboutService.UpdateOneAboutAsync(aboutId, request);
+            if(result.StatusCode == 200)
+                return Ok(result.Data);
             return BadRequest();
         }
 

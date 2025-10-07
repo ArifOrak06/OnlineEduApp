@@ -25,7 +25,7 @@ namespace OnlineEduApp.Service.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<CustomResponseDto<BannerDtoForCreate>> CreateOneBannerAsync(int bannerId, BannerDtoForCreate bannerDtoForCreate)
+        public async Task<CustomResponseDto<BannerDtoForCreate>> CreateOneBannerAsync(BannerDtoForCreate bannerDtoForCreate)
         {
             // Validation check DataAnnatation olarak Dto Propertyleri üzerinden yapılmakatadır.
             // Null Check

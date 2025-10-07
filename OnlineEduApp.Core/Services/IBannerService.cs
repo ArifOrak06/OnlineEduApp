@@ -10,7 +10,7 @@ namespace OnlineEduApp.Core.Services
         Task<(CustomResponseDto<List<BannerDto>> bannerDtoList,MetaData metaData)> GetAllBannersAsync(BannerParameters bannerParameters);
         Task<(CustomResponseDto<List<BannerDto>> bannerListDto, MetaData metaData)> GetAllDeletedBannersAsync(BannerParameters bannerParameters);
         Task<CustomResponseDto<BannerDto>> GetBannerDtoByIdAsync(int bannerId);
-        Task<CustomResponseDto<BannerDtoForCreate>> CreateOneBannerAsync(int bannerId, BannerDtoForCreate bannerDtoForCreate);
+        Task<CustomResponseDto<BannerDtoForCreate>> CreateOneBannerAsync(BannerDtoForCreate bannerDtoForCreate);
         Task<CustomResponseDto<NoContentDto>> DeleteOneBannerAsync(int bannerId);
         Task<CustomResponseDto<NoContentDto>> SoftDeleteOneBannerAsync(int bannerId);
         Task<CustomResponseDto<BannerDtoForUpdate>> UpdateOneBannerAsync(int bannerId, BannerDtoForUpdate bannerDtoForUpdate);
