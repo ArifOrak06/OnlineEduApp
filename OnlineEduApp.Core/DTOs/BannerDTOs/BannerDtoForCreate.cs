@@ -1,8 +1,7 @@
 ﻿namespace OnlineEduApp.Core.DTOs.BannerDTOs
 {
-    public class BannerDtoForCreate
+    public sealed class BannerDtoForCreate : BannerDtoForManipulation
     {
-        public string Title { get; set; } = null!;
-        public string? ImageUrl { get; set; }
+    
     }
 }

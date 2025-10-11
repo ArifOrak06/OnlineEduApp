@@ -1,6 +1,5 @@
 ﻿using OnlineEduApp.Core.DTOs.BlogDTOs;
 using OnlineEduApp.Core.DTOs.CourseDTOs;
-using OnlineEduApp.Core.Entities.Concretes;
 
 namespace OnlineEduApp.Core.DTOs.CategoryDTOs
 {

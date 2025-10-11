@@ -30,6 +30,10 @@ builder.Services.AddDependenciesForRepositoryLayer();
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+builder.Services.Configure<ApiBehaviorOptions>(options =>
+{
+    options.SuppressModelStateInvalidFilter = true;
+});
 
 builder.Services.AddScoped<ValidationFilterAttribute>();
 

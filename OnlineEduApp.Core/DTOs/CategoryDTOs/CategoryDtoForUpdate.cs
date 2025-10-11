@@ -1,11 +1,11 @@
-﻿namespace OnlineEduApp.Core.DTOs.CategoryDTOs
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OnlineEduApp.Core.DTOs.CategoryDTOs
 {
-    public class CategoryDtoForUpdate
+    public sealed class CategoryDtoForUpdate : CategoryDtoForManipulation
     {
+        [Required(ErrorMessage = "Id zorunlu alandır.")]
         public int Id { get; set; }
-        public string Name { get; set; } = null!;
-        public string? Icon { get; set; }
-        public string? Description { get; set; }
         public bool IsActive { get; set; }
 
     }

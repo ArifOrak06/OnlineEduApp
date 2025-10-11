@@ -1,15 +1,13 @@
 ﻿using OnlineEduApp.Core.DTOs.CategoryDTOs;
+using System.ComponentModel.DataAnnotations;
 
 namespace OnlineEduApp.Core.DTOs.CourseDTOs
 {
-    public sealed class CourseDtoForUpdate
+    public sealed class CourseDtoForUpdate : CourseDtoForManipulation
     {
+        [Required(ErrorMessage = "Kurs Id zorunlu bir alandır.")]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string? ImageUrl { get; set; }
-        public int CategoryId { get; set; }
         public CategoryDto Category { get; set; }
-        public decimal Price { get; set; }
         public bool IsActive { get; set; }
 
     }

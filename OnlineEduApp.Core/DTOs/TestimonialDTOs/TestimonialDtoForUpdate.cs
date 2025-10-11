@@ -1,13 +1,11 @@
-﻿namespace OnlineEduApp.Core.DTOs.TestimonialDTOs
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OnlineEduApp.Core.DTOs.TestimonialDTOs
 {
-    public class TestimonialDtoForUpdate
+    public sealed class TestimonialDtoForUpdate :TestimonialDtoForManipulation
     {
+        [Required(ErrorMessage ="Id alanı zorunlu bir alandır.")]
         public int Id { get; set; }
-        public string Name { get; set; }
-        public string Title { get; set; } = null!;
-        public string ImageUrl { get; set; } = null!;
-        public string Comment { get; set; } = null!;
-        public int Star { get; set; }
         public bool IsActive { get; set; }
     }
 }

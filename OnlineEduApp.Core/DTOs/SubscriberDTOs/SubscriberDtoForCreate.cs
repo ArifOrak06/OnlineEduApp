@@ -1,7 +1,7 @@
 ﻿namespace OnlineEduApp.Core.DTOs.SubscriberDTOs
 {
-    public class SubscriberDtoForCreate
+    public sealed class SubscriberDtoForCreate : SubscriberDtoForManipulation
     {
-        public string Email { get; set; } = null!;
+     
     }
 }

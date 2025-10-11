@@ -1,10 +1,11 @@
-﻿namespace OnlineEduApp.Core.DTOs.BannerDTOs
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OnlineEduApp.Core.DTOs.BannerDTOs
 {
     public class BannerDtoForUpdate
     {
+        [Required(ErrorMessage ="Id alanı zorunlu bir alandır.")]
         public int Id { get; set; }
-        public string Title { get; set; } = null!;
-        public string? ImageUrl { get; set; }
         public bool IsActive { get; set; }
     }
 }

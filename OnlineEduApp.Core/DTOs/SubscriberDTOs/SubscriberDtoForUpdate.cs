@@ -1,9 +1,11 @@
-﻿namespace OnlineEduApp.Core.DTOs.SubscriberDTOs
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace OnlineEduApp.Core.DTOs.SubscriberDTOs
 {
-    public class SubscriberDtoForUpdate
+    public sealed class SubscriberDtoForUpdate : SubscriberDtoForManipulation
     {
+        [Required(ErrorMessage = "Id zorunlu bir alandır.")]
         public int Id { get; set; }
-        public string Email { get; set; } = null!;
         public bool IsActive { get; set; }
     }
 }

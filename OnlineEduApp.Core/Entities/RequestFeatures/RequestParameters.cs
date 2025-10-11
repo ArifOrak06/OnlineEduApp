@@ -7,8 +7,9 @@
         // Auto-implemented properties for pagination
         public int PageNumber { get; set; }
 
+        // Full property 1
         private int _pageSize;
-
+        // Full Property 2
         public int PageSize
         {
             get { return _pageSize; }
