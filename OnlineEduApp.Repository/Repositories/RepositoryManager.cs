@@ -10,6 +10,8 @@ namespace OnlineEduApp.Repository.Repositories
         private readonly Lazy<IBlogRepository> _blogRepository;
         private readonly Lazy<ICourseRepository> _courseRepository;
         private readonly Lazy<ICategoryRepository> _categoryRepository;
+        private readonly Lazy<IContactRepository> _contactRepository;
+        private readonly Lazy<IMessageRepository> _messageRepository;
 
         public RepositoryManager(AppDbContext context)
         {
@@ -18,6 +20,8 @@ namespace OnlineEduApp.Repository.Repositories
             _blogRepository = new Lazy<IBlogRepository>(() => new BlogRepository(context));
             _courseRepository = new Lazy<ICourseRepository>(() => new CourseRepository(context));
             _categoryRepository = new Lazy<ICategoryRepository>(() => new CategoryRepository(context));
+            _contactRepository = new Lazy<IContactRepository>(() => new ContactRepository(context));
+            _messageRepository = new Lazy<IMessageRepository>(() => new MessageRepository(context));
         }
 
         public IAboutRepository AboutRepository => _aboutRepository.Value;
@@ -29,5 +33,9 @@ namespace OnlineEduApp.Repository.Repositories
         public ICourseRepository CourseRepository => _courseRepository.Value;
 
         public ICategoryRepository CategoryRepository => _categoryRepository.Value;
+
+        public IContactRepository ContactRepository => _contactRepository.Value;
+
+        public IMessageRepository MessageRepository => _messageRepository.Value;
     }
 }

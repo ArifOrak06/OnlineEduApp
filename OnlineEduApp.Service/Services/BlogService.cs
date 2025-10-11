@@ -51,14 +51,23 @@ namespace OnlineEduApp.Service.Services
 
         public async Task<(CustomResponseDto<List<BlogDto>> responseDto, MetaData metaData)> GetAllBlogsWithCategoryAsync(BlogParameters blogParameters)
         {
-            if(!blogParameters.ValidPriceRange)
-                throw new PriceOutOfRangeBadRequestException(); // Global hata yakalama da hata yakalanacak ve Status Code 400 olarak döndürülecek.
+     
 
             PagedList<Blog> items = await _repositoryManager.BlogRepository.GetAllBlogsAsync(false,blogParameters, x=> x.IsActive&&!x.IsDeleted,x => x.Category);
             if(items is null)
                 throw new ArgumentNullException(nameof(items));
             List<BlogDto> blogDtos = _mapper.Map<List<BlogDto>>(items);
             return (CustomResponseDto<List<BlogDto>>.Success(200, blogDtos), items.MetaData);
+        }
+
+        public async Task<(CustomResponseDto<List<BlogDto>> responseDto, MetaData metaData)> GetAllBlogsWithCategoryByCategoryIdAsync(int categoryId, BlogParameters blogParameters)
+        {
+            PagedList<Blog> blogPagedList  = await _repositoryManager.BlogRepository.GetAllBlogsAsync(false, blogParameters, x => x.CategoryId.Equals(categoryId), x => x.Category);
+            if (blogPagedList is null)
+                throw new ArgumentNullException(nameof(blogPagedList));
+            List<BlogDto> blogDtos = _mapper.Map<List<BlogDto>>(blogPagedList);
+            return (CustomResponseDto<List<BlogDto>>.Success(200,blogDtos), blogPagedList.MetaData);
+
         }
 
         public async Task<(CustomResponseDto<List<BlogDto>> responseDto, MetaData metaData)> GetAllDeletedBlogsWithCategoryAsync(BlogParameters blogParameters)

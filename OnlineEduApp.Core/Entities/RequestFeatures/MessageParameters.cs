@@ -1,8 +1,6 @@
 ﻿namespace OnlineEduApp.Core.Entities.RequestFeatures
 {
-    public class BlogParameters : RequestParameters
+    public class MessageParameters : RequestParameters
     {
-      
-
     }
 }

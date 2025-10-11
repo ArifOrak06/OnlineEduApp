@@ -7,5 +7,7 @@
         IBlogRepository BlogRepository { get; }
         ICourseRepository CourseRepository { get; }
         ICategoryRepository CategoryRepository { get; }
+        IContactRepository ContactRepository { get; }
+        IMessageRepository MessageRepository { get; }
     }
 }

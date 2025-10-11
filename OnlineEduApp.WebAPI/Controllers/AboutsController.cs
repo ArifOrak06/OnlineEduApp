@@ -69,7 +69,7 @@ namespace OnlineEduApp.WebAPI.Controllers
                 return NoContent();
             return BadRequest();
         }
-        [HttpPut("{aboutId:int")]
+        [HttpPut("{aboutId:int}")]
         public async Task<IActionResult> UpdateOneAboutAsync([FromRoute(Name="aboutId")] int aboutId, [FromBody]AboutDtoForUpdate request)
         {
             var result = await _aboutService.UpdateOneAboutAsync(aboutId, request);
