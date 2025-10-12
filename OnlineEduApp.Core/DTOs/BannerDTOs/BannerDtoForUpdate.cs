@@ -2,7 +2,7 @@
 
 namespace OnlineEduApp.Core.DTOs.BannerDTOs
 {
-    public class BannerDtoForUpdate
+    public class BannerDtoForUpdate : BannerDtoForManipulation
     {
         [Required(ErrorMessage ="Id alanı zorunlu bir alandır.")]
         public int Id { get; set; }

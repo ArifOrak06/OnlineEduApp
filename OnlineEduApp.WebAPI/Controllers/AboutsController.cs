@@ -4,6 +4,7 @@ using OnlineEduApp.Core.Entities.RequestFeatures;
 using OnlineEduApp.Core.Services;
 using OnlineEduApp.SharedLibrary.Response;
 using OnlineEduApp.SharedLibrary.ResponseResultPattern;
+using OnlineEduApp.WebAPI.ActionFilters;
 using System.Text.Json;
 
 namespace OnlineEduApp.WebAPI.Controllers
@@ -46,9 +47,11 @@ namespace OnlineEduApp.WebAPI.Controllers
             CustomResponseDto<AboutDto>? result = await _aboutService.GetOneAboutByIdAsync(aboutId);
             return Ok(result.Data);
         }
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPost]
         public async Task<IActionResult> CreateOneAboutAsync([FromBody] AboutDtoForCreate request)
         {
+         
             CustomResponseDto<AboutDtoForCreate>? result = await _aboutService.CreateOneAboutAsync(request);
             return Ok(result.Data);
         }
@@ -69,9 +72,11 @@ namespace OnlineEduApp.WebAPI.Controllers
                 return NoContent();
             return BadRequest();
         }
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPut("{aboutId:int}")]
         public async Task<IActionResult> UpdateOneAboutAsync([FromRoute(Name="aboutId")] int aboutId, [FromBody]AboutDtoForUpdate request)
         {
+     
             var result = await _aboutService.UpdateOneAboutAsync(aboutId, request);
             if(result.StatusCode == 200)
                 return Ok(result.Data);

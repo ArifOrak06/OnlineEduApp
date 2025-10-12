@@ -3,6 +3,7 @@ using OnlineEduApp.Core.DTOs.BannerDTOs;
 using OnlineEduApp.Core.Entities.RequestFeatures;
 using OnlineEduApp.Core.Services;
 using OnlineEduApp.SharedLibrary.ResponseResultPattern;
+using OnlineEduApp.WebAPI.ActionFilters;
 using System.Text.Json;
 
 namespace OnlineEduApp.WebAPI.Controllers
@@ -65,18 +66,23 @@ namespace OnlineEduApp.WebAPI.Controllers
                 return NoContent();
             return BadRequest();
         }
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPost]
         public async Task<IActionResult> CreateOneBannerAsync([FromBody]BannerDtoForCreate request)
         {
+           
             var result = await _bannerService.CreateOneBannerAsync(request);
             if(result.StatusCode == 200)
                 return Ok(result.Data);
             return BadRequest();
         }
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPut("{bannerId:int}")]
         public async Task<IActionResult> UpdateOneBannerAsync([FromRoute(Name="bannerId")] int bannerId, [FromBody]BannerDtoForUpdate request)
         {
+            
             var result = await _bannerService.UpdateOneBannerAsync(bannerId, request);
+
             if(result.StatusCode == 200)
                 return Ok(result.Data);
             return BadRequest();

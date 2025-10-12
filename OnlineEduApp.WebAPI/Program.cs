@@ -37,10 +37,12 @@ builder.Services.Configure<ApiBehaviorOptions>(options =>
 
 builder.Services.AddScoped<ValidationFilterAttribute>();
 
+
+
+
 var app = builder.Build();
 
 
-app.ConfigureExceptionHandler();
 
 // Configure the HTTP request pipeline.
 
@@ -51,6 +53,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+app.ConfigureExceptionHandler();
 
 app.UseAuthorization();
 

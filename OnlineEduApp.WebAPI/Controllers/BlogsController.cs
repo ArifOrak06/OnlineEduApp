@@ -3,6 +3,7 @@ using OnlineEduApp.Core.DTOs.BlogDTOs;
 using OnlineEduApp.Core.Entities.RequestFeatures;
 using OnlineEduApp.Core.Services;
 using OnlineEduApp.SharedLibrary.ResponseResultPattern;
+using OnlineEduApp.WebAPI.ActionFilters;
 using System.Text.Json;
 
 namespace OnlineEduApp.WebAPI.Controllers
@@ -52,15 +53,19 @@ namespace OnlineEduApp.WebAPI.Controllers
             var response = await _blogService.SoftDeleteOneBlogAsync(blogId);
             return StatusCode(response.StatusCode);
         }
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPost]
         public async Task<IActionResult> CreateOneBlog([FromBody]BlogDtoForCreate request)
         {
+            
             var response  = await _blogService.CreateOneBlogAsync(request);
             return StatusCode(response.StatusCode, response.Data);
         }
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPut("{blogId:int}")]
         public async Task<IActionResult> UpdateOneBlog([FromRoute(Name="blogId")]int blogId, [FromBody] BlogDtoForUpdate request)
         {
+           
             var response = await _blogService.UpdateOneBlogAsync(blogId, request);
             return StatusCode(response.StatusCode, response.Data);
         }

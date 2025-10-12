@@ -2,11 +2,10 @@
 
 namespace OnlineEduApp.Core.DTOs.AboutDTOs
 {
-    public sealed class AboutDtoForUpdate
+    public sealed class AboutDtoForUpdate : AboutDtoForManipulation
     {
         [Required(ErrorMessage ="Hakkımızda Id alanı boş geçilemez.")]   
         public int Id { get; set; }
-
         public bool IsActive { get; set; }
 
     }
