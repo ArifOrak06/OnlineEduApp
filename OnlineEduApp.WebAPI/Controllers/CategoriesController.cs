@@ -4,6 +4,7 @@ using OnlineEduApp.Core.Entities.RequestFeatures;
 using OnlineEduApp.Core.Services;
 using OnlineEduApp.SharedLibrary.Response;
 using OnlineEduApp.SharedLibrary.ResponseResultPattern;
+using OnlineEduApp.WebAPI.ActionFilters;
 using System.Text.Json;
 
 namespace OnlineEduApp.WebAPI.Controllers
@@ -51,12 +52,14 @@ namespace OnlineEduApp.WebAPI.Controllers
             CustomResponseDto<NoContentDto> response = await _categoryService.DeleteOneCategoryAsync(categoryId);
             return StatusCode(response.StatusCode);
         }
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPost]
         public async Task<IActionResult> CreateOneCategory([FromBody]CategoryDtoForCreate request)
         {
             CustomResponseDto<CategoryDtoForCreate> response = await _categoryService.CreateOneCategoryAsync(request);
             return StatusCode(response.StatusCode, response.Data);
         }
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPut("{categoryId:int}")]
         public async Task<IActionResult> UpdateOneCategory([FromRoute(Name = "categoryId")] int categoryId, [FromBody] CategoryDtoForUpdate request)
         {

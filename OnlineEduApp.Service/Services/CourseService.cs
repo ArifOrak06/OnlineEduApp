@@ -50,6 +50,15 @@ namespace OnlineEduApp.Service.Services
             return CustomResponseDto<NoContentDto>.Success(204);
         }
 
+        public async Task<(CustomResponseDto<List<CourseDto>> responseDto, MetaData metaData)> GetAllCoursesByCategoryIdAsync(int categoryId, CourseParameters courseParameters)
+        {
+            PagedList<Course> courses = await _repositoryManager.CourseRepository.GetAllCoursesWithCategoryAsync(false, courseParameters, x => x.CategoryId.Equals(categoryId), x => x.Category);
+            if(courses == null)
+                throw new ArgumentNullException(nameof(courses));
+            List<CourseDto> courseDtos = _mapper.Map<List<CourseDto>>(courses);
+            return (CustomResponseDto<List<CourseDto>>.Success(200, courseDtos), courses.MetaData);
+        }
+
         public async Task<(CustomResponseDto<List<CourseDto>> responseDto, MetaData metaData)> GetAllCoursesWithCategoryAsync(CourseParameters courseParameters)
         {
             PagedList<Course> courses = await _repositoryManager.CourseRepository.GetAllCoursesWithCategoryAsync(false, courseParameters, x => x.IsActive && !x.IsDeleted, x => x.Category);

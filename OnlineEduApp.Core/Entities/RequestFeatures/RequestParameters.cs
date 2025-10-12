@@ -16,5 +16,6 @@
             set { _pageSize = value > maxPageSize ? maxPageSize : value; } // prop'a atanan dğer maxPageSize'den büyükse maxPageSize değeri olan 50 atanır, küçükse prop'a atanan değer atanır.
 
         }
+       
     }
 }
