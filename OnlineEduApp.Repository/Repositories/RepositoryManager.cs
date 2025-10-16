@@ -12,6 +12,7 @@ namespace OnlineEduApp.Repository.Repositories
         private readonly Lazy<ICategoryRepository> _categoryRepository;
         private readonly Lazy<IContactRepository> _contactRepository;
         private readonly Lazy<IMessageRepository> _messageRepository;
+        private readonly Lazy<ISocialMediaRepository> _socialMediaRepository;
 
         public RepositoryManager(AppDbContext context)
         {
@@ -22,6 +23,7 @@ namespace OnlineEduApp.Repository.Repositories
             _categoryRepository = new Lazy<ICategoryRepository>(() => new CategoryRepository(context));
             _contactRepository = new Lazy<IContactRepository>(() => new ContactRepository(context));
             _messageRepository = new Lazy<IMessageRepository>(() => new MessageRepository(context));
+            _socialMediaRepository = new Lazy<ISocialMediaRepository>(() => new SocialMediaRepository(context));
         }
 
         public IAboutRepository AboutRepository => _aboutRepository.Value;
@@ -37,5 +39,7 @@ namespace OnlineEduApp.Repository.Repositories
         public IContactRepository ContactRepository => _contactRepository.Value;
 
         public IMessageRepository MessageRepository => _messageRepository.Value;
+
+        public ISocialMediaRepository SocialMediaRepository => _socialMediaRepository.Value;
     }
 }

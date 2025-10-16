@@ -9,5 +9,6 @@
         ICategoryRepository CategoryRepository { get; }
         IContactRepository ContactRepository { get; }
         IMessageRepository MessageRepository { get; }
+        ISocialMediaRepository SocialMediaRepository { get; }
     }
 }
