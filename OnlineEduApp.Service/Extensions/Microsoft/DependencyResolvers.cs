@@ -17,7 +17,10 @@ namespace OnlineEduApp.Service.Extensions.Microsoft
             services.AddScoped<IBlogService, BlogService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IContactService,ContactService>();
+            services.AddScoped<IMessageService, MessageService>();
             services.AddScoped<ISocialMediaService,SocialMediaService>();
+            services.AddScoped<ISubscriberService, SubscriberService>();
+            services.AddScoped<ITestimonialService, TestimonialService>();
 
         }
     }

@@ -10,5 +10,7 @@
         IContactRepository ContactRepository { get; }
         IMessageRepository MessageRepository { get; }
         ISocialMediaRepository SocialMediaRepository { get; }
+        ISubscriberRepository SubscriberRepository { get; }
+        ITestimonialRepository TestimonialRepository { get; }
     }
 }

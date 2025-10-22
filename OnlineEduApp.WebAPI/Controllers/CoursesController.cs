@@ -21,10 +21,10 @@ namespace OnlineEduApp.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllCoursesAndCategory([FromQuery]CourseParameters courseParameters)
+        public async Task<IActionResult> GetAllCoursesAndCategory([FromQuery] CourseParameters courseParameters)
         {
             (CustomResponseDto<List<CourseDto>> responseDto, MetaData metaData) response = await _courseService.GetAllCoursesWithCategoryAsync(courseParameters);
-            Response.Headers.Add("X-Pagination",JsonSerializer.Serialize(response.metaData));
+            Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(response.metaData));
             return StatusCode(response.responseDto.StatusCode, response.responseDto.Data);
         }
         [HttpGet]
@@ -35,7 +35,7 @@ namespace OnlineEduApp.WebAPI.Controllers
             return StatusCode(response.responseDto.StatusCode, response.responseDto.Data);
         }
         [HttpGet("{categoryId:int}")]
-        public async Task<IActionResult> GetAllCoursesByCategoryId([FromRoute(Name = "categoryId")]int categoryId, [FromQuery]CourseParameters courseParameters)
+        public async Task<IActionResult> GetAllCoursesByCategoryId([FromRoute(Name = "categoryId")] int categoryId, [FromQuery] CourseParameters courseParameters)
         {
             (CustomResponseDto<List<CourseDto>> responseDto, MetaData metaData) response = await _courseService.GetAllCoursesByCategoryIdAsync(categoryId, courseParameters);
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(response.metaData));
@@ -48,13 +48,13 @@ namespace OnlineEduApp.WebAPI.Controllers
             return StatusCode(response.StatusCode, response.Data);
         }
         [HttpGet("{courseId:int}")]
-        public async Task<IActionResult> SoftDeleteOneCourse([FromRoute(Name = "courseId")]int courseId)
+        public async Task<IActionResult> SoftDeleteOneCourse([FromRoute(Name = "courseId")] int courseId)
         {
             CustomResponseDto<NoContentDto> response = await _courseService.SoftDeleteOneCourseAsync(courseId);
             return StatusCode(response.StatusCode);
         }
         [HttpDelete("{courseId:int}")]
-        public async Task<IActionResult> DeleteOneCourse([FromRoute(Name = "courseId")]int courseId)
+        public async Task<IActionResult> DeleteOneCourse([FromRoute(Name = "courseId")] int courseId)
         {
             CustomResponseDto<NoContentDto> response = await _courseService.DeleteOneCourseAsync(courseId);
             return StatusCode(response.StatusCode);

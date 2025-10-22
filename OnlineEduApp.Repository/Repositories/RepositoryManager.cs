@@ -13,7 +13,8 @@ namespace OnlineEduApp.Repository.Repositories
         private readonly Lazy<IContactRepository> _contactRepository;
         private readonly Lazy<IMessageRepository> _messageRepository;
         private readonly Lazy<ISocialMediaRepository> _socialMediaRepository;
-
+        private readonly Lazy<ISubscriberRepository> _subscriberRepository;
+        private readonly Lazy<ITestimonialRepository> _testimonialRepository;
         public RepositoryManager(AppDbContext context)
         {
             _aboutRepository = new Lazy<IAboutRepository>(() => new AboutRepository(context));
@@ -24,6 +25,8 @@ namespace OnlineEduApp.Repository.Repositories
             _contactRepository = new Lazy<IContactRepository>(() => new ContactRepository(context));
             _messageRepository = new Lazy<IMessageRepository>(() => new MessageRepository(context));
             _socialMediaRepository = new Lazy<ISocialMediaRepository>(() => new SocialMediaRepository(context));
+            _subscriberRepository = new Lazy<ISubscriberRepository>(() => new  SubscriberRepository(context));
+            _testimonialRepository = new Lazy<ITestimonialRepository>(() => new TestimonialRepository(context));
         }
 
         public IAboutRepository AboutRepository => _aboutRepository.Value;
@@ -41,5 +44,9 @@ namespace OnlineEduApp.Repository.Repositories
         public IMessageRepository MessageRepository => _messageRepository.Value;
 
         public ISocialMediaRepository SocialMediaRepository => _socialMediaRepository.Value;
+
+        public ISubscriberRepository SubscriberRepository => _subscriberRepository.Value;
+
+        public ITestimonialRepository TestimonialRepository => _testimonialRepository.Value;
     }
 }

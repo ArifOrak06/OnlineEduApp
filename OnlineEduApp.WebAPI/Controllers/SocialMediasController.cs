@@ -5,6 +5,7 @@ using OnlineEduApp.Core.Entities.RequestFeatures;
 using OnlineEduApp.Core.Services;
 using OnlineEduApp.SharedLibrary.Response;
 using OnlineEduApp.SharedLibrary.ResponseResultPattern;
+using OnlineEduApp.WebAPI.ActionFilters;
 
 namespace OnlineEduApp.WebAPI.Controllers
 {
@@ -27,7 +28,7 @@ namespace OnlineEduApp.WebAPI.Controllers
 
         }
         [HttpGet]
-        public async Task<IActionResult> GetAllSocialMedias([FromQuery]SocialMediaParameters socialMediaParamaters)
+        public async Task<IActionResult> GetAllSocialMedias([FromQuery] SocialMediaParameters socialMediaParamaters)
         {
             (CustomResponseDto<List<SocialMediaDto>> responseDto, MetaData metaData) response = await _socialMediaService.GetAllSocialMediasAsync(socialMediaParamaters);
             Response.Headers.Add("X-Pagination", System.Text.Json.JsonSerializer.Serialize(response.metaData));
@@ -40,35 +41,37 @@ namespace OnlineEduApp.WebAPI.Controllers
             Response.Headers.Add("X-Pagination", System.Text.Json.JsonSerializer.Serialize(response.metaData));
             return StatusCode(response.responseDto.StatusCode, response.metaData);
         }
-        [HttpGet("{socialMediaId}")]
-        public async Task<IActionResult> GetOneSocialMedia([FromRoute(Name="socialMediaId")]int socialMEdiaId)
+        [HttpGet("{socialMediaId:int}")]
+        public async Task<IActionResult> GetOneSocialMedia([FromRoute(Name = "socialMediaId")] int socialMediaId)
         {
-            CustomResponseDto<SocialMediaDto> result = await _socialMediaService.GetOneSocialMediaAsyncByIdAsync(socialMEdiaId);
+            CustomResponseDto<SocialMediaDto> result = await _socialMediaService.GetOneSocialMediaAsyncByIdAsync(socialMediaId);
             return StatusCode(result.StatusCode, result.Data);
         }
         [HttpGet("{socialMediaId:int}")]
-        public async Task<IActionResult> SoftDeleteOneSocialMedia([FromRoute(Name ="socialMediaId")]int socialMediaId)
+        public async Task<IActionResult> SoftDeleteOneSocialMedia([FromRoute(Name = "socialMediaId")] int socialMediaId)
         {
             CustomResponseDto<NoContentDto> result = await _socialMediaService.SoftDeleteOneSocialMediaAsync(socialMediaId);
             return NoContent();
         }
         [HttpDelete("{socialMediaId:int}")]
-        public async Task<IActionResult> DeleteOneSocialMedia([FromRoute(Name="socialMediaId")]int socialMediaId)
+        public async Task<IActionResult> DeleteOneSocialMedia([FromRoute(Name = "socialMediaId")] int socialMediaId)
         {
-            CustomResponseDto<NoContentDto> result = await _socialMediaService.DeleteOneSocialMediaAsync(socialMediaId);    
+            CustomResponseDto<NoContentDto> result = await _socialMediaService.DeleteOneSocialMediaAsync(socialMediaId);
             return NoContent();
         }
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPost]
-        public async Task<IActionResult> CreateOneSocialMedia([FromBody]SocialMediaDtoForCreate socialMediaDtoForCreate)
+        public async Task<IActionResult> CreateOneSocialMedia([FromBody] SocialMediaDtoForCreate socialMediaDtoForCreate)
         {
             CustomResponseDto<SocialMediaDtoForCreate> result = await _socialMediaService.CreateOneSocialMediaAsync(socialMediaDtoForCreate);
             return StatusCode(result.StatusCode, result.Data);
         }
+        [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPut("{socialMediaId:int}")]
-        public async Task<IActionResult> UpdateOneSocialMediaAsync([FromRoute(Name="socialMediaId")]int socialMediaId,[FromBody]SocialMediaDtoForUpdate socialMediaDtoForUpdate)
+        public async Task<IActionResult> UpdateOneSocialMedia([FromRoute(Name = "socialMediaId")] int socialMediaId, [FromBody] SocialMediaDtoForUpdate socialMediaDtoForUpdate)
         {
             CustomResponseDto<SocialMediaDtoForUpdate> result = await _socialMediaService.UpdateOneSocialMediaAsync(socialMediaId, socialMediaDtoForUpdate);
             return StatusCode(result.StatusCode, result.Data);
-        }   
+        }
     }
 }

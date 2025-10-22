@@ -29,19 +29,19 @@ namespace OnlineEduApp.WebAPI.Controllers
             return StatusCode(response.StatusCode, response.Data);
         }
         [HttpGet("{contactId:int}")]
-        public async Task<IActionResult> GetOneContactById([FromRoute(Name="contactId")] int contactId)
+        public async Task<IActionResult> GetOneContactById([FromRoute(Name = "contactId")] int contactId)
         {
             CustomResponseDto<ContactDto> response = await _contactService.GetContactByIdAsync(contactId);
             return StatusCode(response.StatusCode, response.Data);
         }
-        [HttpGet("{contactId: int}")]
-        public async Task<IActionResult> SoftDeleteOneContact([FromRoute(Name= "contactId")] int contactId)
+        [HttpGet("{contactId:int}")]
+        public async Task<IActionResult> SoftDeleteOneContact([FromRoute(Name = "contactId")] int contactId)
         {
             CustomResponseDto<NoContentDto> response = await _contactService.SoftDeleteOneContactAsync(contactId);
             return StatusCode(response.StatusCode);
         }
         [HttpDelete("{contactId:int}")]
-        public async Task<IActionResult> DeleteOneContact([FromRoute(Name="contactId")] int contactId)
+        public async Task<IActionResult> DeleteOneContact([FromRoute(Name = "contactId")] int contactId)
         {
             CustomResponseDto<NoContentDto> response = await _contactService.DeleteOneContactAsync(contactId);
             return StatusCode(response.StatusCode);
@@ -53,7 +53,7 @@ namespace OnlineEduApp.WebAPI.Controllers
             return StatusCode(response.StatusCode, response.Data);
         }
         [HttpPut("{contactId:int}")]
-        public async Task<IActionResult> UpdateOneContact([FromRoute(Name="contactId")] int contactId,[FromBody] ContactDtoForUpdate contactDtoForUpdate)
+        public async Task<IActionResult> UpdateOneContact([FromRoute(Name = "contactId")] int contactId, [FromBody] ContactDtoForUpdate contactDtoForUpdate)
         {
             CustomResponseDto<ContactDtoForUpdate> response = await _contactService.UpdateOneContactAsync(contactId, contactDtoForUpdate);
             return StatusCode(response.StatusCode, response.Data);
