@@ -41,14 +41,14 @@ namespace OnlineEduApp.WebAPI.Controllers
             CustomResponseDto<List<TestimonialDto>> result = await _testimonialService.GetAllTestimonialsNoPaggingAsync();
             return StatusCode(result.StatusCode, result.Data);
         }
-        [HttpGet("{testimonialId : int}")]
-        public async Task<IActionResult> GetOneTestimonial([FromRoute(Name="testimonialId")] int testimonialId)
+        [HttpGet("{testimonialId:int}")]
+        public async Task<IActionResult> GetOneTestimonial([FromRoute(Name= "testimonialId")] int testimonialId)
         {
             CustomResponseDto<TestimonialDto> result = await _testimonialService.GetOneTestimonialAsync(testimonialId);
             return StatusCode(result.StatusCode, result.Data);
         }
         [HttpGet("{testimonialId:int}")]
-        public async Task<IActionResult> SoftDeleteOneTestimonial([FromRoute(Name="testimonialId")] int testimonialId)
+        public async Task<IActionResult> SoftDeleteOneTestimonial([FromRoute(Name= "testimonialId")] int testimonialId)
         {
             CustomResponseDto<NoContentDto> result = await _testimonialService.SoftDeleteOneTestimonialAsync(testimonialId);
             return StatusCode(result.StatusCode);
@@ -67,10 +67,10 @@ namespace OnlineEduApp.WebAPI.Controllers
             return StatusCode(result.StatusCode,result.Data);
         }
         [ServiceFilter(typeof(ValidationFilterAttribute))]
-        [HttpPut("{testimonialId : int}")]
-        public async Task<IActionResult> UpdateOneTestimonial([FromRoute(Name="testimonialId")]int testimonialId, [FromBody]TestimonialDtoForUpdate testimonialDtoForUpdate)
+        [HttpPut("{testimonialId:int}")]
+        public async Task<IActionResult> UpdateOneTestimonial([FromRoute(Name= "testimonialId")]int testimonialId, [FromBody]TestimonialDtoForUpdate testimonialDtoForUpdate)
         {
-            CustomResponseDto<TestimonialDtoForUpdate> result = await _testimonialService.UpdateOneTestimonialAsync(testimonialId,testimonialDtoForUpdate);
+            CustomResponseDto<TestimonialDtoForUpdate> result = await _testimonialService.UpdateOneTestimonialAsync(testimonialId, testimonialDtoForUpdate);
             return StatusCode(result.StatusCode,result.Data);
         }
     }

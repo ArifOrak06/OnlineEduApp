@@ -68,20 +68,20 @@ namespace OnlineEduApp.WebAPI.Controllers
         }
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPost]
-        public async Task<IActionResult> CreateOneBannerAsync([FromBody]BannerDtoForCreate request)
+        public async Task<IActionResult> CreateOneBannerAsync([FromBody]BannerDtoForCreate bannerDtoForCreate)
         {
            
-            var result = await _bannerService.CreateOneBannerAsync(request);
+            var result = await _bannerService.CreateOneBannerAsync(bannerDtoForCreate);
             if(result.StatusCode == 200)
                 return Ok(result.Data);
             return BadRequest();
         }
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPut("{bannerId:int}")]
-        public async Task<IActionResult> UpdateOneBannerAsync([FromRoute(Name="bannerId")] int bannerId, [FromBody]BannerDtoForUpdate request)
+        public async Task<IActionResult> UpdateOneBannerAsync([FromRoute(Name="bannerId")] int bannerId, [FromBody]BannerDtoForUpdate bannerDtoForUpdate)
         {
             
-            var result = await _bannerService.UpdateOneBannerAsync(bannerId, request);
+            var result = await _bannerService.UpdateOneBannerAsync(bannerId, bannerDtoForUpdate);
 
             if(result.StatusCode == 200)
                 return Ok(result.Data);

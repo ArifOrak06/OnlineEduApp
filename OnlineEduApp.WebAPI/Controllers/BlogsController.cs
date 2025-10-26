@@ -55,18 +55,18 @@ namespace OnlineEduApp.WebAPI.Controllers
         }
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPost]
-        public async Task<IActionResult> CreateOneBlog([FromBody]BlogDtoForCreate request)
+        public async Task<IActionResult> CreateOneBlog([FromBody]BlogDtoForCreate blogDtoForCreate)
         {
             
-            var response  = await _blogService.CreateOneBlogAsync(request);
+            var response  = await _blogService.CreateOneBlogAsync(blogDtoForCreate);
             return StatusCode(response.StatusCode, response.Data);
         }
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPut("{blogId:int}")]
-        public async Task<IActionResult> UpdateOneBlog([FromRoute(Name="blogId")]int blogId, [FromBody] BlogDtoForUpdate request)
+        public async Task<IActionResult> UpdateOneBlog([FromRoute(Name="blogId")]int blogId, [FromBody] BlogDtoForUpdate blogDtoForUpdate)
         {
            
-            var response = await _blogService.UpdateOneBlogAsync(blogId, request);
+            var response = await _blogService.UpdateOneBlogAsync(blogId, blogDtoForUpdate);
             return StatusCode(response.StatusCode, response.Data);
         }
         [HttpDelete("{blogId:int}")]

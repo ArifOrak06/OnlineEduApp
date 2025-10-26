@@ -53,6 +53,14 @@ namespace OnlineEduApp.Service.Services
             return CustomResponseDto<NoContentDto>.Success(204);
         }
 
+        public async Task<CustomResponseDto<List<AboutDto>>> GetAllAboutsNoPaggingAsync()
+        {
+            List<About>? abouts = await _repositoryManager.AboutRepository.GetByFilter(false, x => x.IsActive && !x.IsDeleted).ToListAsync();
+            if(abouts is null)
+                throw new ArgumentException(nameof(abouts));
+            return CustomResponseDto<List<AboutDto>>.Success(200,_mapper.Map<List<AboutDto>>(abouts));  
+        }
+
         public async Task<(CustomResponseDto<List<AboutDto>> responseDtoList, MetaData metaData)> GetAllActiveAboutsAsync(AboutParameters aboutParameters)
         {
             var items = await _repositoryManager.AboutRepository.GetAllAboutsAsync(false,aboutParameters);

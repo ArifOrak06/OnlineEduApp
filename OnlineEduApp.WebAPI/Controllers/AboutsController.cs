@@ -21,18 +21,28 @@ namespace OnlineEduApp.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> GetAllAbouts([FromQuery]AboutParameters aboutParameters)
+        public async Task<IActionResult> GetAllAbouts([FromQuery] AboutParameters aboutParameters)
         {
             // değişken tipini tanımlarken Service katmanından gelecek olan tuple'ın içeriğine göre tanımladık ki karışıklık olmasın ve MetaData'yı veyahut asıl data'yı kullanmak için erişebilelim.
 
-            (CustomResponseDto<List<AboutDto>>? responseDtoList,MetaData? metaData) pagedResult = await _aboutService.GetAllActiveAboutsAsync(aboutParameters);
+            (CustomResponseDto<List<AboutDto>>? responseDtoList, MetaData? metaData) pagedResult = await _aboutService.GetAllActiveAboutsAsync(aboutParameters);
 
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(pagedResult.metaData));
 
 
-            return Ok(pagedResult.responseDtoList.Data); 
+            return Ok(new AboutDtoWithMetaData
+            {
+                Abouts = pagedResult.responseDtoList.Data,
+                MetaData = pagedResult.metaData
+            }); 
             
             // aboutDtoList = CustomResponseDto<List<AboutDto> demektir, Service katmanından sunum katmanına responseDtoList adı ile gönderilmiştir. 
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetAllAboutsNoPagging()
+        {
+            CustomResponseDto<List<AboutDto>>? response = await _aboutService.GetAllAboutsNoPaggingAsync();
+            return Ok(response.Data);
         }
         [HttpGet("getalldeletedabouts")]
         public async Task<IActionResult> GetAllDeletedAbouts([FromQuery]AboutParameters aboutParameters)
@@ -49,10 +59,10 @@ namespace OnlineEduApp.WebAPI.Controllers
         }
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPost]
-        public async Task<IActionResult> CreateOneAboutAsync([FromBody] AboutDtoForCreate request)
+        public async Task<IActionResult> CreateOneAboutAsync([FromBody] AboutDtoForCreate aboutDtoForCreate)
         {
          
-            CustomResponseDto<AboutDtoForCreate>? result = await _aboutService.CreateOneAboutAsync(request);
+            CustomResponseDto<AboutDtoForCreate>? result = await _aboutService.CreateOneAboutAsync(aboutDtoForCreate);
             return Ok(result.Data);
         }
         [HttpGet("{aboutId:int}")]
@@ -74,10 +84,10 @@ namespace OnlineEduApp.WebAPI.Controllers
         }
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPut("{aboutId:int}")]
-        public async Task<IActionResult> UpdateOneAboutAsync([FromRoute(Name="aboutId")] int aboutId, [FromBody]AboutDtoForUpdate request)
+        public async Task<IActionResult> UpdateOneAboutAsync([FromRoute(Name="aboutId")] int aboutId, [FromBody]AboutDtoForUpdate aboutDtoForUpdate)
         {
      
-            var result = await _aboutService.UpdateOneAboutAsync(aboutId, request);
+            var result = await _aboutService.UpdateOneAboutAsync(aboutId, aboutDtoForUpdate);
             if(result.StatusCode == 200)
                 return Ok(result.Data);
             return BadRequest();

@@ -1,0 +1,16 @@
+﻿@model List<AboutDto>
+
+@{
+    Layout = "_AdminLayout";
+    ViewData["Title"] = "Hakkimizda";
+}
+
+<h1>Hakkımızda Sayfasına hoşgeldiniz.</h1>
+
+@foreach(var about in Model)
+{
+    <h3>@about.Description</h3>
+}
+
+
+

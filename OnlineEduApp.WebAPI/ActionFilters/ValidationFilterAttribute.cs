@@ -17,7 +17,7 @@ namespace OnlineEduApp.WebAPI.ActionFilters
 
             // The parameter is null check !
 
-            if (param != null)
+            if (param == null)
                 context.Result = new BadRequestObjectResult(CustomResponseDto<NoContentDto>.Fail(400, $"Parametre olarak gönderilmesi gereken Object Null değer içeriyor. Controller : {controller}"));
 
             // The parameter is validation check !

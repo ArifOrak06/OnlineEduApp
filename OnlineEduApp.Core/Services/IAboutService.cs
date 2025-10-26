@@ -9,6 +9,7 @@ namespace OnlineEduApp.Core.Services
     {
         Task<(CustomResponseDto<List<AboutDto>> responseDtoList, MetaData metaData)> GetAllActiveAboutsAsync(AboutParameters aboutParameters);
         Task<(CustomResponseDto<List<AboutDto>> responseDtoList, MetaData metaData)> GetAllDeletedAboutsAsync(AboutParameters aboutParameters);
+        Task<CustomResponseDto<List<AboutDto>>> GetAllAboutsNoPaggingAsync();
         Task<CustomResponseDto<AboutDto>> GetOneAboutByIdAsync(int aboutId);
         Task<CustomResponseDto<AboutDtoForCreate>> CreateOneAboutAsync(AboutDtoForCreate aboutDtoForCreate);
         Task<CustomResponseDto<AboutDtoForUpdate>> UpdateOneAboutAsync(int aboutId, AboutDtoForUpdate aboutDtoForUpdate);

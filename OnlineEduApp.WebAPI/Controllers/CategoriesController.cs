@@ -54,16 +54,16 @@ namespace OnlineEduApp.WebAPI.Controllers
         }
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPost]
-        public async Task<IActionResult> CreateOneCategory([FromBody]CategoryDtoForCreate request)
+        public async Task<IActionResult> CreateOneCategory([FromBody]CategoryDtoForCreate categoryDtoForCreate)
         {
-            CustomResponseDto<CategoryDtoForCreate> response = await _categoryService.CreateOneCategoryAsync(request);
+            CustomResponseDto<CategoryDtoForCreate> response = await _categoryService.CreateOneCategoryAsync(categoryDtoForCreate);
             return StatusCode(response.StatusCode, response.Data);
         }
         [ServiceFilter(typeof(ValidationFilterAttribute))]
         [HttpPut("{categoryId:int}")]
-        public async Task<IActionResult> UpdateOneCategory([FromRoute(Name = "categoryId")] int categoryId, [FromBody] CategoryDtoForUpdate request)
+        public async Task<IActionResult> UpdateOneCategory([FromRoute(Name = "categoryId")] int categoryId, [FromBody] CategoryDtoForUpdate categoryDtoForUpdate)
         {
-            CustomResponseDto<CategoryDtoForUpdate> response = await _categoryService.UpdateOneCategoryAsync(categoryId, request);
+            CustomResponseDto<CategoryDtoForUpdate> response = await _categoryService.UpdateOneCategoryAsync(categoryId, categoryDtoForUpdate);
             return StatusCode(response.StatusCode, response.Data);
         }
 
